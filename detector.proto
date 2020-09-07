@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message Tensor {
+    bytes image = 1;
+}
+message ObjectInfo{
+    string objects = 1;
+}
+service FaceDetector {
+    rpc detect(Tensor) returns (ObjectInfo) {}
+}

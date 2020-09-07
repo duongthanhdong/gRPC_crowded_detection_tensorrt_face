@@ -1,0 +1,28 @@
+version: '2.3'
+services:
+  detectionTensorRT:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docker-registry.vnpttiengiang.vn/crowded/docker-base-tensorrt-serving-face:latest
+    command: "python3 server.py --port 30042"
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+      NVIDIA_VISIBLE_DEVICES: all
+    runtime: nvidia
+    ports:
+    - "30042:30042"
+  # goyolov3-detector:
+  #   image: docker-registry.vnpttiengiang.vn/face/face_detection:1.0
+  #   command: "/app/http"
+  #   environment:
+  #     YOLO_DATA_CFG: models/face/face.data            # We can change these variable to point to another yolov model (e.g: tiny)
+  #     YOLO_CFG_FILE: models/face/face.cfg
+  #     YOLO_WEIGHTS_FILE: models/face/face_130.weights
+  #     YOLO_DETECT_THRESHOLD: 0.5
+  #     RATE_REQUEST_PER_SECOND: 100
+  #     RATE_BURST_NUM: 1000
+  #   runtime: nvidia
+  #   ports:
+  #   - "8080:8080"
